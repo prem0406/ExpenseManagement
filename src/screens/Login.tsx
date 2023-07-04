@@ -1,19 +1,29 @@
 import React, {useState} from 'react';
-import {Button, StyleSheet, Text, TextInput, View} from 'react-native';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {RootStackParamList} from '../../App';
+import {Button, StyleSheet, Text, TextInput, View, Alert} from 'react-native';
+// import {NativeStackScreenProps} from '@react-navigation/native-stack';
+// import {RootStackParamList} from '../../App';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'Login'>;
+// type Props = NativeStackScreenProps<RootStackParamList, 'Login'>;
 
-const Login = ({navigation}: Props) => {
+const Login = ({}) => {
   const [name, setName] = useState('');
 
   const handleNameChange = (value: string) => {
     setName(value);
   };
 
+  const storeData = async (value: string) => {
+    try {
+      await AsyncStorage.setItem('@user_name', value);
+    } catch (e) {
+      Alert.alert('Error StoreData: ', value);
+    }
+  };
+
   const handleSubmit = () => {
-    navigation.navigate('Home', {name: name});
+    storeData(name);
+    // navigation.navigate('Home');
   };
 
   return (
