@@ -85,7 +85,7 @@ const Home = ({navigation}: Props) => {
       <ItemRow
         item={{
           date: '',
-          title: 'Total:',
+          title: 'Total :',
           amount: totalAmount.toString(),
           id: '999',
           desc: '',
