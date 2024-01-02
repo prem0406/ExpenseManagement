@@ -5,19 +5,30 @@ import {
   TextProps as RNTextProps,
   TextStyle,
 } from 'react-native';
-import React from 'react';
+import React, {useMemo} from 'react';
+import {$fontWeightStyles, Weights} from './text.types';
+import {TextColors, colors} from '../theme/colors';
 
 export interface TextProps extends RNTextProps {
   //   preset?: TextTypes;
-  //   weight?: Weights;
   //   size?: Sizes;
-  //   color?: TextColors;
   styleOverride?: StyleProp<TextStyle>;
   children?: React.ReactNode;
+  weight?: Weights;
+  color?: TextColors;
 }
 
-export const CustomText = ({children}: TextProps) => {
-  return <Text style={styles.textStyle}>{children}</Text>;
+export const CustomText = ({children, weight = 'normal', color}: TextProps) => {
+  const $weight = useMemo(() => {
+    return $fontWeightStyles[weight as Weights];
+  }, [weight]);
+
+  const $color = useMemo(
+    () => ({color: colors.textColors[color ?? TextColors.text_primary]}),
+    [color],
+  );
+
+  return <Text style={[styles.textStyle, $weight, $color]}>{children}</Text>;
 };
 
 const styles = StyleSheet.create({
@@ -25,6 +36,5 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '400',
     lineHeight: 24,
-    color: 'black',
   },
 });

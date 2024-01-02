@@ -2,13 +2,13 @@ import {Platform} from 'react-native';
 
 const fonts = {
   openSans: {
-    light: 'OpenSans-Light',
-    normal: 'OpenSans',
-    semiBold: 'OpenSans-Semibold',
-    bold: 'OpenSans-Bold',
+    light: 'open-sans.light',
+    normal: 'open-sans.regular',
+    semibold: 'open-sans.semibold',
+    bold: 'open-sans.bold',
   },
   pass: {
-    normal: 'Glyphter',
+    normal: 'Glyphter', //TODO: add this font
   },
 };
 
