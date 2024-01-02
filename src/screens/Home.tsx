@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Text, View, Alert, FlatList} from 'react-native';
+import {View, Alert, FlatList, StyleSheet} from 'react-native';
 import {RootStackParamList} from '../../App';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import ItemRow from '../components/ItemRow';
+import {CustomButton, CustomText} from '../components';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
@@ -17,7 +18,7 @@ export type Item = {
 
 const Home = ({navigation}: Props) => {
   const [itemList, setItemList] = useState<Item[]>([]);
-  const [username, setUsername] = useState('');
+  const [username, setUsername] = useState('HHHH');
 
   const handleBtnPress = () => {
     navigation.navigate('AddNew');
@@ -58,7 +59,7 @@ const Home = ({navigation}: Props) => {
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
-      getData();
+      // getData();
       console.log('Mounted');
     });
 
@@ -72,16 +73,18 @@ const Home = ({navigation}: Props) => {
   }, 0);
 
   return (
-    <View>
-      <Text>Welcome: {username}</Text>
-      <Button title="Add new" onPress={handleBtnPress} />
-      <Button title="Get Data" onPress={getData} />
-      <Button title="Clear Data" onPress={clearData} />
-      <FlatList
-        data={itemList}
-        renderItem={item => <ItemRow item={item.item} />}
-        keyExtractor={item => item.id}
-      />
+    <View style={styles.container}>
+      <View style={styles.topWrapper}>
+        <CustomText>Welcome: {username}</CustomText>
+        <CustomButton label="Add new" onPress={handleBtnPress} />
+        <CustomButton label="Get Data" onPress={getData} />
+        <CustomButton label="Clear Data" onPress={clearData} />
+        <FlatList
+          data={itemList}
+          renderItem={item => <ItemRow item={item.item} />}
+          keyExtractor={item => item.id}
+        />
+      </View>
       <ItemRow
         item={{
           date: '',
@@ -96,3 +99,12 @@ const Home = ({navigation}: Props) => {
 };
 
 export default Home;
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 16,
+  },
+  topWrapper: {
+    gap: 8,
+  },
+});

@@ -16,7 +16,7 @@ export type RootStackParamList = {
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function App(): React.JSX.Element {
-  const [username, setUsername] = useState('');
+  const [username, setUsername] = useState('TEST1');
   const getData = async () => {
     try {
       const name_str = await AsyncStorage.getItem('@user_name');
