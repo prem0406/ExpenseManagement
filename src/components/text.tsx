@@ -33,8 +33,8 @@ export const CustomText = ({children, weight = 'normal', color}: TextProps) => {
 
 const styles = StyleSheet.create({
   textStyle: {
-    fontSize: 16,
-    fontWeight: '400',
+    fontSize: 24,
+    fontWeight: '500',
     lineHeight: 24,
   },
 });
