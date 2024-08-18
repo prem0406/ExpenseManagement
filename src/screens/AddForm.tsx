@@ -1,11 +1,14 @@
 import React, {useState} from 'react';
-import {Button, StyleSheet, Text, TextInput, View, Alert} from 'react-native';
+import {View, Alert, StyleSheet} from 'react-native';
 import DatePicker from 'react-native-date-picker';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../App';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Item} from './Home';
 import uuid from 'react-native-uuid';
+import {CustomButton} from '../components';
+import {CustomTextInput} from '../components/input';
+import {NavigationLayout} from '../components/navigationLayout';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'AddNew'>;
 
@@ -52,61 +55,53 @@ const AddForm = ({navigation}: Props) => {
   };
 
   return (
-    <View>
-      <DatePicker
-        modal
-        open={open}
-        date={date}
-        onConfirm={d => {
-          setOpen(false);
-          setDate(d);
-        }}
-        onCancel={() => {
-          setOpen(false);
-        }}
-        mode="date"
-      />
-      <Text>Add new</Text>
-      <TextInput
-        style={styles.nameInput}
-        placeholder="Date"
-        onPressIn={() => setOpen(true)}
-        value={getFormattedDate(date)}
-      />
-      <TextInput
-        style={styles.nameInput}
-        placeholder="Title"
-        value={title}
-        onChangeText={val => setTitle(val)}
-      />
-      <TextInput
-        style={styles.nameInput}
-        placeholder="Description"
-        value={desc}
-        onChangeText={val => setDesc(val)}
-      />
-      <TextInput
-        style={styles.nameInput}
-        placeholder="Amount (in Rs.)"
-        inputMode="numeric"
-        value={amount}
-        onChangeText={val => setAmount(val)}
-      />
-      <Button title="Add" onPress={handleBtnPress} />
-    </View>
+    <NavigationLayout headerText="Add New Expense">
+      <View style={styles.container}>
+        <DatePicker
+          modal
+          open={open}
+          date={date}
+          onConfirm={d => {
+            setOpen(false);
+            setDate(d);
+          }}
+          onCancel={() => {
+            setOpen(false);
+          }}
+          mode="date"
+        />
+        <CustomTextInput
+          placeholder="Date"
+          onPressIn={() => setOpen(true)}
+          value={getFormattedDate(date)}
+        />
+        <CustomTextInput
+          placeholder="Title"
+          value={title}
+          onChangeText={val => setTitle(val)}
+        />
+        <CustomTextInput
+          placeholder="Description (Optional)"
+          value={desc}
+          onChangeText={val => setDesc(val)}
+        />
+        <CustomTextInput
+          placeholder="Amount (in Rs.)"
+          inputMode="numeric"
+          value={amount}
+          onChangeText={val => setAmount(val)}
+        />
+        <CustomButton label="Add" onPress={handleBtnPress} />
+      </View>
+    </NavigationLayout>
   );
 };
 
+export default AddForm;
+
 const styles = StyleSheet.create({
-  nameInput: {
-    borderColor: '#0d99ff',
-    borderWidth: 1,
-    borderStyle: 'solid',
-    borderRadius: 10,
-    padding: 10,
-    margin: 10,
-    backgroundColor: '#efefef',
+  container: {
+    padding: 16,
+    rowGap: 16,
   },
 });
-
-export default AddForm;

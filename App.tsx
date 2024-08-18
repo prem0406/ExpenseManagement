@@ -44,7 +44,11 @@ function App(): React.JSX.Element {
         options={{title: 'Login'}}
       /> */}
         <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="AddNew" component={AddForm} />
+        <Stack.Screen
+          name="AddNew"
+          component={AddForm}
+          options={{headerShown: false}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   ) : (
