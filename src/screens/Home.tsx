@@ -4,7 +4,6 @@ import {RootStackParamList} from '../../App';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import ItemRow from '../components/ItemRow';
-import {CustomButton, CustomText} from '../components';
 import {NavigationLayout} from '../components/navigationLayout';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
@@ -78,11 +77,9 @@ const Home = ({navigation}: Props) => {
             id: '111',
             desc: 'Spent For groceries',
           }}
+          onPress={() => navigation.navigate('ExpenseDetails')}
         />
-        {/* <CustomText>Welcome: {username}</CustomText> */}
         <View style={styles.topWrapper}>
-          <CustomButton label="Get Data" onPress={getData} />
-          <CustomButton label="Clear Data" onPress={clearData} />
           <FlatList
             data={itemList}
             renderItem={item => <ItemRow item={item.item} />}

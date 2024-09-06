@@ -14,6 +14,7 @@ export enum TextTypes {
   body = 'body',
   body_small = 'body_small',
   h4 = 'h4',
+  h1 = 'h1',
 }
 
 export interface TextProps extends RNTextProps {
@@ -73,6 +74,11 @@ const typeStyles: Record<keyof typeof TextTypes, TextStyle> = {
   [TextTypes.h4]: {
     //TO be changed
     ...typography.FONT_STYLES.fontStyle_20,
+    fontWeight: '700',
+  },
+  [TextTypes.h1]: {
+    //TO be changed
+    ...typography.FONT_STYLES.fontStyle_32,
     fontWeight: '700',
   },
 };

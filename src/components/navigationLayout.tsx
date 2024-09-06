@@ -52,8 +52,9 @@ export const NavigationLayout = ({
 const styles = StyleSheet.create({
   headerStyles: {
     flexDirection: 'row',
+    paddingHorizontal: 8,
     backgroundColor: colors.backgroundColors.mainColor,
-    height: 50,
+    height: 56,
     alignItems: 'center',
   },
   center: {

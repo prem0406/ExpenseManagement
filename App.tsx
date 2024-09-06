@@ -6,11 +6,13 @@ import Home from './src/screens/Home';
 import AddForm from './src/screens/AddForm';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Alert, StatusBar} from 'react-native';
+import {ExpenseDetails} from './src/screens/expenseDetails';
 
 export type RootStackParamList = {
   // Login: undefined;
   Home: undefined;
   AddNew: undefined;
+  ExpenseDetails: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -48,6 +50,7 @@ function App(): React.JSX.Element {
       /> */}
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="AddNew" component={AddForm} />
+        <Stack.Screen name="ExpenseDetails" component={ExpenseDetails} />
       </Stack.Navigator>
     </NavigationContainer>
   ) : (
