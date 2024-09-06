@@ -29,27 +29,27 @@ const LINE_HEIGHTS = {
 };
 
 const FONT_STYLES = {
-  fontStyle_01: {
+  fontStyle_10: {
     fontSize: FONT_SIZES.fontSize_01,
     lineHeight: LINE_HEIGHTS.lineHeight_01,
   },
-  fontStyle_02: {
+  fontStyle_12: {
     fontSize: FONT_SIZES.fontSize_02,
     lineHeight: LINE_HEIGHTS.lineHeight_01,
   },
-  fontStyle_03: {
+  fontStyle_16: {
     fontSize: FONT_SIZES.fontSize_03,
     lineHeight: LINE_HEIGHTS.lineHeight_02,
   },
-  fontStyle_04: {
+  fontStyle_20: {
     fontSize: FONT_SIZES.fontSize_04,
     lineHeight: LINE_HEIGHTS.lineHeight_02,
   },
-  fontStyle_05: {
+  fontStyle_24: {
     fontSize: FONT_SIZES.fontSize_05,
     lineHeight: LINE_HEIGHTS.lineHeight_03,
   },
-  fontStyle_06: {
+  fontStyle_32: {
     fontSize: FONT_SIZES.fontSize_06,
     lineHeight: LINE_HEIGHTS.lineHeight_04,
   },
