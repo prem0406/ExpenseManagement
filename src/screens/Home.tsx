@@ -5,6 +5,7 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import ItemRow from '../components/ItemRow';
 import {CustomButton, CustomText} from '../components';
+import {Icon} from '../components/icon';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
@@ -79,6 +80,10 @@ const Home = ({navigation}: Props) => {
         <CustomButton label="Add new" onPress={handleBtnPress} />
         <CustomButton label="Get Data" onPress={getData} />
         <CustomButton label="Clear Data" onPress={clearData} />
+        <Icon name="back" />
+        <Icon name="profile" />
+        <Icon name="stopRound" />
+
         <FlatList
           data={itemList}
           renderItem={item => <ItemRow item={item.item} />}
