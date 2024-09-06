@@ -8,10 +8,23 @@ type ColorOptions<T extends string | number | symbol> = {
   [key in T]: string;
 };
 
+//TODO: this will be replaced by newTextColors
 // TYPE ===> [key in TextColors]: string;
 const textColors: ColorOptions<keyof typeof TextColors> = {
-  text_primary: '#000000',
-  text_secondary: '#5A6572',
+  text_primary: '#212121',
+  text_secondary: '#757575',
+  text_On_Dark: '#FFFFFF',
+};
+
+const newTextColors = {
+  primary_color_dark: '#0288D1',
+  primary_color_light: '#B3E5FC',
+  primary_color: '#03A9F4',
+  text_icons: '#FFFFFF',
+  accent_color: '#009688',
+  divider_color: '#BDBDBD',
+  text_primary: '#212121',
+  text_secondary: '#757575',
   text_On_Dark: '#FFFFFF',
 };
 
@@ -30,4 +43,5 @@ const backgroundColors: BackgroundOptions<keyof typeof BackgroundColors> = {
 export const colors = {
   textColors,
   backgroundColors,
+  newTextColors,
 };
