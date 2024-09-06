@@ -3,9 +3,9 @@ import {Platform} from 'react-native';
 const fonts = {
   openSans: {
     light: 'open-sans.light',
-    normal: 'open-sans.regular',
-    semibold: 'open-sans.semibold',
-    bold: 'open-sans.bold',
+    normal: 'open-sans.regular', //body content
+    semibold: 'open-sans.semibold', //Titles within screen
+    bold: 'open-sans.bold', // Rarely used
   },
   pass: {
     normal: 'Glyphter', //TODO: add this font
@@ -13,11 +13,11 @@ const fonts = {
 };
 
 const FONT_SIZES = {
-  fontSize_01: 10,
-  fontSize_02: 12,
-  fontSize_03: 16,
-  fontSize_04: 20,
-  fontSize_05: 24,
+  fontSize_01: 10, //for captions, this font size is very small, use carefully
+  fontSize_02: 12, //body small for subtitles or error messages below textInputs
+  fontSize_03: 16, //Heading_4 style bold  and body style normal
+  fontSize_04: 20, //To hightlight some value in screen, like final price to be deducted or bottomsheet title
+  fontSize_05: 24, //Can be used as title in carousels,
   fontSize_06: 32,
 };
 
