@@ -4,7 +4,7 @@ const Back = (props: SvgProps) => (
   <Svg viewBox="0 0 512 512" {...props}>
     <Path
       fill="none"
-      stroke="#000000" //send as prop
+      stroke="#FFFFFF" //send as prop
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={48}

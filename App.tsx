@@ -5,7 +5,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Home from './src/screens/Home';
 import AddForm from './src/screens/AddForm';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {Alert} from 'react-native';
+import {Alert, StatusBar} from 'react-native';
 
 export type RootStackParamList = {
   // Login: undefined;
@@ -37,18 +37,17 @@ function App(): React.JSX.Element {
 
   return username ? (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
+      <StatusBar backgroundColor="transparent" barStyle="default" translucent />
+      <Stack.Navigator
+        initialRouteName="Home"
+        screenOptions={{headerShown: false}}>
         {/* <Stack.Screen
         name="Login"
         component={Login}
         options={{title: 'Login'}}
       /> */}
         <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen
-          name="AddNew"
-          component={AddForm}
-          options={{headerShown: false}}
-        />
+        <Stack.Screen name="AddNew" component={AddForm} />
       </Stack.Navigator>
     </NavigationContainer>
   ) : (

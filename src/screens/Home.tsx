@@ -5,7 +5,7 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import ItemRow from '../components/ItemRow';
 import {CustomButton, CustomText} from '../components';
-import {Icon} from '../components/icon';
+import {NavigationLayout} from '../components/navigationLayout';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
@@ -51,16 +51,8 @@ const Home = ({navigation}: Props) => {
     }
   };
 
-  // useEffect(() => {
-  //   console.log('Mounted');
-  //   getData();
-
-  //   return () => console.log('Un-Mounted');
-  // }, []);
-
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
-      // getData();
       console.log('Mounted');
     });
 
@@ -74,32 +66,31 @@ const Home = ({navigation}: Props) => {
   }, 0);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.topWrapper}>
-        <CustomText>Welcome: {username}</CustomText>
-        <CustomButton label="Add new" onPress={handleBtnPress} />
-        <CustomButton label="Get Data" onPress={getData} />
-        <CustomButton label="Clear Data" onPress={clearData} />
-        <Icon name="back" />
-        <Icon name="profile" />
-        <Icon name="stopRound" />
-
-        <FlatList
-          data={itemList}
-          renderItem={item => <ItemRow item={item.item} />}
-          keyExtractor={item => item.id}
+    <NavigationLayout
+      headerText="All Spents"
+      rightIcon={{name: 'plusRound', onPress: handleBtnPress}}>
+      <View style={styles.container}>
+        <ItemRow
+          item={{
+            date: '23-05-2023',
+            title: 'Groceries',
+            amount: '2000',
+            id: '111',
+            desc: 'Spent For groceries',
+          }}
         />
+        {/* <CustomText>Welcome: {username}</CustomText> */}
+        <View style={styles.topWrapper}>
+          <CustomButton label="Get Data" onPress={getData} />
+          <CustomButton label="Clear Data" onPress={clearData} />
+          <FlatList
+            data={itemList}
+            renderItem={item => <ItemRow item={item.item} />}
+            keyExtractor={item => item.id}
+          />
+        </View>
       </View>
-      <ItemRow
-        item={{
-          date: '',
-          title: 'Total:',
-          amount: totalAmount.toString(),
-          id: '999',
-          desc: '',
-        }}
-      />
-    </View>
+    </NavigationLayout>
   );
 };
 
@@ -111,5 +102,6 @@ const styles = StyleSheet.create({
   },
   topWrapper: {
     gap: 8,
+    paddingTop: 16,
   },
 });

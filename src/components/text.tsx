@@ -31,6 +31,7 @@ export const CustomText = ({
   weight = 'normal',
   color,
   type,
+  styleOverride,
 }: TextProps) => {
   //weight will be removed
   const $weight = useMemo(() => {
@@ -45,7 +46,9 @@ export const CustomText = ({
   const $type = useMemo(() => typeStyles[type ?? TextTypes.body], [type]);
 
   return (
-    <Text style={[styles.textStyle, $type, $weight, $color]}>{children}</Text>
+    <Text style={[styles.textStyle, $type, $weight, $color, styleOverride]}>
+      {children}
+    </Text>
   );
 };
 

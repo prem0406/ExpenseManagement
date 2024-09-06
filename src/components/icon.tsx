@@ -1,17 +1,18 @@
 import {StyleSheet, View} from 'react-native';
 import React from 'react';
 import Back from '../assets/icons/back';
-import {IconsMap} from '../assets/icons/iconsMap';
+import {IconsMap, IconsType} from '../assets/icons/iconsMap';
 
-export const Icon = ({name}: {name: keyof typeof IconsMap}) => {
+export const Icon = ({name}: {name: IconsType}) => {
   const SVGImage = IconsMap[name] ? IconsMap[name] : <Back />;
-  const reactComponent = React.cloneElement(SVGImage);
+  const reactComponent = React.cloneElement(SVGImage, {color: 'white'});
   return <View style={styles.container}>{reactComponent}</View>;
 };
 
 const styles = StyleSheet.create({
   container: {
-    height: 49,
-    backgroundColor: 'red',
+    height: 48,
+    width: 48,
+    borderRadius: 24,
   },
 });

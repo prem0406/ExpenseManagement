@@ -4,6 +4,7 @@ import {Item} from '../screens/Home';
 import {colors, TextColors} from '../theme/colors';
 import {CustomText, TextTypes} from './text';
 import {Amount} from './amount';
+import {Icon} from './icon';
 
 type ItemRowProps = {
   item: Item;
@@ -12,6 +13,7 @@ type ItemRowProps = {
 const ItemRow = ({item}: ItemRowProps) => {
   return (
     <View style={styles.container}>
+      <Icon name="back" />
       <View style={styles.mainContainer}>
         <CustomText
           type={TextTypes.body_small}
