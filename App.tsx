@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {PersistGate} from 'redux-persist/integration/react';
 import Login from './src/screens/Login';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -8,7 +9,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Alert, StatusBar} from 'react-native';
 import {ExpenseDetails} from './src/screens/expenseDetails';
 import {Provider} from 'react-redux';
-import {store} from './store';
+import {persistor, store} from './store';
 
 export type RootStackParamList = {
   // Login: undefined;
@@ -40,29 +41,31 @@ function App(): React.JSX.Element {
 
   return (
     <Provider store={store}>
-      {username ? (
-        <NavigationContainer>
-          <StatusBar
-            backgroundColor="transparent"
-            barStyle="default"
-            translucent
-          />
-          <Stack.Navigator
-            initialRouteName="Home"
-            screenOptions={{headerShown: false}}>
-            {/* <Stack.Screen
+      <PersistGate loading={null} persistor={persistor}>
+        {username ? (
+          <NavigationContainer>
+            <StatusBar
+              backgroundColor="transparent"
+              barStyle="default"
+              translucent
+            />
+            <Stack.Navigator
+              initialRouteName="Home"
+              screenOptions={{headerShown: false}}>
+              {/* <Stack.Screen
               name="Login"
               component={Login}
               options={{title: 'Login'}}
             /> */}
-            <Stack.Screen name="Home" component={Home} />
-            <Stack.Screen name="AddNew" component={AddForm} />
-            <Stack.Screen name="ExpenseDetails" component={ExpenseDetails} />
-          </Stack.Navigator>
-        </NavigationContainer>
-      ) : (
-        <Login />
-      )}
+              <Stack.Screen name="Home" component={Home} />
+              <Stack.Screen name="AddNew" component={AddForm} />
+              <Stack.Screen name="ExpenseDetails" component={ExpenseDetails} />
+            </Stack.Navigator>
+          </NavigationContainer>
+        ) : (
+          <Login />
+        )}
+      </PersistGate>
     </Provider>
   );
 }
