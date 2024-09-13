@@ -4,15 +4,19 @@ import DatePicker from 'react-native-date-picker';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../App';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {Item} from './Home';
+
 import uuid from 'react-native-uuid';
 import {CustomButton} from '../components';
 import {CustomTextInput} from '../components/input';
 import {NavigationLayout} from '../components/navigationLayout';
+import {Expence} from '../types';
+import {useAppDispatch} from '../../hooks';
+import {addExpense} from '../redux/app.slice';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'AddNew'>;
 
 const AddForm = ({navigation}: Props) => {
+  const dipatch = useAppDispatch();
   const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState('');
@@ -26,9 +30,9 @@ const AddForm = ({navigation}: Props) => {
     return `${day}-${month}-${year}`;
   };
 
-  const storeData = async (value: Item) => {
+  const storeData = async (value: Expence) => {
     try {
-      let list: Item[] = [];
+      let list: Expence[] = [];
       const getJsonVal = await AsyncStorage.getItem('@storage_Key');
 
       if (getJsonVal != null) {
@@ -44,13 +48,14 @@ const AddForm = ({navigation}: Props) => {
   };
 
   const handleBtnPress = async () => {
-    await storeData({
+    const expense: Expence = {
       id: uuid.v4().toString(),
       date: date.toDateString(),
       title,
       desc,
       amount,
-    });
+    };
+    dipatch(addExpense(expense));
     navigation.navigate('Home');
   };
 

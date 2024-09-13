@@ -5,6 +5,7 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import ItemRow from '../components/ItemRow';
 import {NavigationLayout} from '../components/navigationLayout';
+import {useAppSelector} from '../../hooks';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
@@ -19,6 +20,7 @@ export type Item = {
 const Home = ({navigation}: Props) => {
   const [itemList, setItemList] = useState<Item[]>([]);
   const [username, setUsername] = useState('HHHH');
+  const {expenses} = useAppSelector(state => state.expenseReducer);
 
   const handleBtnPress = () => {
     navigation.navigate('AddNew');
@@ -64,6 +66,7 @@ const Home = ({navigation}: Props) => {
     return parseInt(curr.amount, 10) + acc;
   }, 0);
 
+  console.log('*******  ', expenses);
   return (
     <NavigationLayout
       headerText="All Spents"

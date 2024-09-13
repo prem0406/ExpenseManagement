@@ -1,4 +1,4 @@
-import {View, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, TouchableOpacity, StatusBar} from 'react-native';
 import React, {PropsWithChildren} from 'react';
 import {CustomText} from './text';
 import {colors, TextColors} from '../theme/colors';
@@ -54,8 +54,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingHorizontal: 8,
     backgroundColor: colors.backgroundColors.mainColor,
-    height: 56,
+    height: (StatusBar.currentHeight ?? 0) + 56,
     alignItems: 'center',
+    paddingTop: StatusBar.currentHeight,
   },
   center: {
     flex: 1,

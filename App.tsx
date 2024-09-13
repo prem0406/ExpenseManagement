@@ -7,6 +7,8 @@ import AddForm from './src/screens/AddForm';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Alert, StatusBar} from 'react-native';
 import {ExpenseDetails} from './src/screens/expenseDetails';
+import {Provider} from 'react-redux';
+import {store} from './store';
 
 export type RootStackParamList = {
   // Login: undefined;
@@ -37,24 +39,32 @@ function App(): React.JSX.Element {
 
   console.log('username: ', username);
 
-  return username ? (
-    <NavigationContainer>
-      <StatusBar backgroundColor="transparent" barStyle="default" translucent />
-      <Stack.Navigator
-        initialRouteName="Home"
-        screenOptions={{headerShown: false}}>
-        {/* <Stack.Screen
-        name="Login"
-        component={Login}
-        options={{title: 'Login'}}
-      /> */}
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="AddNew" component={AddForm} />
-        <Stack.Screen name="ExpenseDetails" component={ExpenseDetails} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  ) : (
-    <Login />
+  return (
+    <Provider store={store}>
+      {username ? (
+        <NavigationContainer>
+          <StatusBar
+            backgroundColor="transparent"
+            barStyle="default"
+            translucent
+          />
+          <Stack.Navigator
+            initialRouteName="Home"
+            screenOptions={{headerShown: false}}>
+            {/* <Stack.Screen
+              name="Login"
+              component={Login}
+              options={{title: 'Login'}}
+            /> */}
+            <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen name="AddNew" component={AddForm} />
+            <Stack.Screen name="ExpenseDetails" component={ExpenseDetails} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      ) : (
+        <Login />
+      )}
+    </Provider>
   );
 }
 
