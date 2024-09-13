@@ -21,6 +21,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function App(): React.JSX.Element {
   const [username, setUsername] = useState('TEST1');
+
   const getData = async () => {
     try {
       const name_str = await AsyncStorage.getItem('@user_name');
@@ -36,8 +37,6 @@ function App(): React.JSX.Element {
   useEffect(() => {
     getData();
   }, []);
-
-  console.log('username: ', username);
 
   return (
     <Provider store={store}>

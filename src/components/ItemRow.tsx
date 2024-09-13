@@ -1,20 +1,20 @@
 import React from 'react';
 import {View, StyleSheet, TouchableOpacity} from 'react-native';
-import {Item} from '../screens/Home';
 import {colors, TextColors} from '../theme/colors';
 import {CustomText, TextTypes} from './text';
 import {Amount} from './amount';
 import {DateTile} from './dateTile';
+import {Expence} from '../types';
 
 type ItemRowProps = {
-  item: Item;
+  item: Expence;
   onPress?: () => void;
 };
 
 const ItemRow = ({item, onPress}: ItemRowProps) => {
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
-      <DateTile />
+      <DateTile date={item?.date} />
       <View style={styles.mainContainer}>
         <View style={styles.centerContainer}>
           {/* convert to tag for may be 'category' */}
@@ -24,7 +24,7 @@ const ItemRow = ({item, onPress}: ItemRowProps) => {
             Label/Tag
           </CustomText>
           <CustomText type={TextTypes.body}>{item.title}</CustomText>
-          {item.desc && (
+          {item?.desc && (
             <CustomText
               type={TextTypes.body_small}
               color={TextColors.text_secondary}>

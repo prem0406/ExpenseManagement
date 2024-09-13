@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
-import {View, Alert, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import DatePicker from 'react-native-date-picker';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../App';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import uuid from 'react-native-uuid';
 import {CustomButton} from '../components';
@@ -28,23 +27,6 @@ const AddForm = ({navigation}: Props) => {
     const year = d.getFullYear();
 
     return `${day}-${month}-${year}`;
-  };
-
-  const storeData = async (value: Expence) => {
-    try {
-      let list: Expence[] = [];
-      const getJsonVal = await AsyncStorage.getItem('@storage_Key');
-
-      if (getJsonVal != null) {
-        list = [...JSON.parse(getJsonVal)];
-      }
-
-      const jsonValue = JSON.stringify([...list, value]);
-      await AsyncStorage.setItem('@storage_Key', jsonValue);
-      console.log('Success in store data');
-    } catch (e) {
-      Alert.alert('Error StoreData');
-    }
   };
 
   const handleBtnPress = async () => {

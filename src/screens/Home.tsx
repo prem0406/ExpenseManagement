@@ -1,91 +1,48 @@
-import React, {useEffect, useState} from 'react';
-import {View, Alert, FlatList, StyleSheet} from 'react-native';
+import React from 'react';
+import {View, FlatList, StyleSheet} from 'react-native';
 import {RootStackParamList} from '../../App';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import ItemRow from '../components/ItemRow';
 import {NavigationLayout} from '../components/navigationLayout';
 import {useAppSelector} from '../../hooks';
+import {Expence} from '../types';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
-export type Item = {
-  id: string;
-  date: string;
-  title: string;
-  desc: string;
-  amount: string;
-};
-
 const Home = ({navigation}: Props) => {
-  const [itemList, setItemList] = useState<Item[]>([]);
-  const [username, setUsername] = useState('HHHH');
   const {expenses} = useAppSelector(state => state.expenseReducer);
 
   const handleBtnPress = () => {
     navigation.navigate('AddNew');
   };
 
-  const getData = async () => {
-    try {
-      const jsonValue = await AsyncStorage.getItem('@storage_Key');
-      const name_str = await AsyncStorage.getItem('@user_name');
+  // const totalAmount = itemList.reduce((acc: number, curr): number => {
+  //   return parseInt(curr.amount, 10) + acc;
+  // }, 0);
 
-      if (jsonValue != null) {
-        const list = JSON.parse(jsonValue);
-        setItemList([...list]);
-      }
-      if (name_str !== null) {
-        setUsername(name_str);
-      }
-      Alert.alert('Success in GetData: ', jsonValue?.toString());
-    } catch (e) {
-      Alert.alert('Error in GetData');
-    }
-  };
+  const renderItem = ({item}: {item: Expence}) => (
+    <ItemRow
+      item={{
+        date: item?.date,
+        title: item?.title,
+        amount: item?.amount,
+        id: item?.id,
+        desc: item?.desc,
+      }}
+      onPress={() => navigation.navigate('ExpenseDetails')}
+    />
+  );
 
-  const clearData = async () => {
-    try {
-      await AsyncStorage.clear();
-    } catch (e) {
-      Alert.alert('Error in GetData');
-    }
-  };
-
-  useEffect(() => {
-    const unsubscribe = navigation.addListener('focus', () => {
-      console.log('Mounted');
-    });
-
-    return unsubscribe;
-  }, [navigation]);
-
-  console.log('Item LIst: ', itemList);
-
-  const totalAmount = itemList.reduce((acc: number, curr): number => {
-    return parseInt(curr.amount, 10) + acc;
-  }, 0);
-
-  console.log('*******  ', expenses);
   return (
     <NavigationLayout
       headerText="All Spents"
       rightIcon={{name: 'plusRound', onPress: handleBtnPress}}>
       <View style={styles.container}>
-        <ItemRow
-          item={{
-            date: '23-05-2023',
-            title: 'Groceries',
-            amount: '2000',
-            id: '111',
-            desc: 'Spent For groceries',
-          }}
-          onPress={() => navigation.navigate('ExpenseDetails')}
-        />
         <View style={styles.topWrapper}>
           <FlatList
-            data={itemList}
-            renderItem={item => <ItemRow item={item.item} />}
+            data={expenses}
+            renderItem={renderItem}
+            contentContainerStyle={styles.contentContainerStyle}
             keyExtractor={item => item.id}
           />
         </View>
@@ -102,6 +59,8 @@ const styles = StyleSheet.create({
   },
   topWrapper: {
     gap: 8,
-    paddingTop: 16,
+  },
+  contentContainerStyle: {
+    gap: 8,
   },
 });
