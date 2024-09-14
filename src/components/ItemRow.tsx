@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     paddingHorizontal: 24,
     backgroundColor: colors.newTextColors.primary_color_light,
+    // backgroundColor: 'white',
     borderRadius: 16,
   },
   mainContainer: {

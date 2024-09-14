@@ -8,7 +8,7 @@ export const ExpenseDetails = () => {
   return (
     <NavigationLayout
       headerText="Add New Expense"
-      leftIcon={{name: 'back', onPress: navigation.goBack}}>
+      leftIcon={{name: 'chevronBack', onPress: navigation.goBack}}>
       <CustomText>ExpenseDetails</CustomText>
     </NavigationLayout>
   );

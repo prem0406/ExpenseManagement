@@ -36,6 +36,7 @@ const Home = ({navigation}: Props) => {
   return (
     <NavigationLayout
       headerText="All Spents"
+      leftIcon={{name: 'menuOutline'}}
       rightIcon={{name: 'plusRound', onPress: handleBtnPress}}>
       <View style={styles.container}>
         <View style={styles.topWrapper}>

@@ -44,7 +44,7 @@ const AddForm = ({navigation}: Props) => {
   return (
     <NavigationLayout
       headerText="Add New Expense"
-      leftIcon={{name: 'back', onPress: navigation.goBack}}>
+      leftIcon={{name: 'chevronBack', onPress: navigation.goBack}}>
       <View style={styles.container}>
         <DatePicker
           modal

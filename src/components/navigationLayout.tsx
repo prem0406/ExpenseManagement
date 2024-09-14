@@ -26,11 +26,13 @@ export const NavigationLayout = ({
   return (
     <>
       <View style={styles.headerStyles}>
-        {leftIcon?.name && (
-          <TouchableOpacity onPress={leftIcon?.onPress}>
-            <Icon name={leftIcon.name} />
-          </TouchableOpacity>
-        )}
+        <View style={styles.iconWrapper}>
+          {leftIcon?.name && (
+            <TouchableOpacity onPress={leftIcon?.onPress}>
+              <Icon name={leftIcon.name} />
+            </TouchableOpacity>
+          )}
+        </View>
         <View style={styles.center}>
           <CustomText
             color={TextColors.text_On_Dark}
@@ -38,11 +40,13 @@ export const NavigationLayout = ({
             {headerText}
           </CustomText>
         </View>
-        {rightIcon?.name && (
-          <TouchableOpacity onPress={rightIcon?.onPress}>
-            <Icon name={rightIcon.name} />
-          </TouchableOpacity>
-        )}
+        <View style={styles.iconWrapper}>
+          {rightIcon?.name && (
+            <TouchableOpacity onPress={rightIcon?.onPress}>
+              <Icon name={rightIcon.name} />
+            </TouchableOpacity>
+          )}
+        </View>
       </View>
       {children}
     </>
@@ -54,14 +58,19 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingHorizontal: 8,
     backgroundColor: colors.backgroundColors.mainColor,
-    height: (StatusBar.currentHeight ?? 0) + 56,
+    height: (StatusBar.currentHeight ?? 0) + 60,
     alignItems: 'center',
     paddingTop: StatusBar.currentHeight,
+    paddingBottom: 8,
   },
   center: {
     flex: 1,
   },
   headerStyle: {
     alignSelf: 'center',
+  },
+  iconWrapper: {
+    height: 48,
+    width: 48,
   },
 });
