@@ -1,5 +1,14 @@
 import {combineReducers, configureStore} from '@reduxjs/toolkit';
-import {persistReducer, persistStore} from 'redux-persist';
+import {
+  FLUSH,
+  PAUSE,
+  PERSIST,
+  persistReducer,
+  persistStore,
+  PURGE,
+  REGISTER,
+  REHYDRATE,
+} from 'redux-persist';
 import {expenseSlice} from './src/redux/app.slice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 // ...
@@ -15,7 +24,16 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
   reducer: persistedReducer,
-  middleware: getDefaultMiddleware => getDefaultMiddleware(),
+
+  /*To remove error: A non-serializable value was detected in an action, in the path:
+  `register`. Value: [Function register] Take a look at the logic that dispatched this action: {"register": [Function register],
+   "rehydrate": [Function rehydrate], "type": "persist/PERSIST"} */
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 });
 
 export const persistor = persistStore(store);
