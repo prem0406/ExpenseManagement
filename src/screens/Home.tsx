@@ -16,10 +16,6 @@ const Home = ({navigation}: Props) => {
     navigation.navigate('AddNew');
   };
 
-  // const totalAmount = itemList.reduce((acc: number, curr): number => {
-  //   return parseInt(curr.amount, 10) + acc;
-  // }, 0);
-
   const renderItem = ({item}: {item: Expence}) => (
     <ItemRow
       item={{
