@@ -43,7 +43,7 @@ const AddForm = ({navigation, route}: Props) => {
     state => state.expenseReducer.selectedExpense,
   );
   const dipatch = useAppDispatch();
-  const {updateMode} = route.params;
+  const updateMode = route?.params?.updateMode;
 
   const filledValues: Expence = {
     id: selectedExpense.id ?? '',
@@ -97,7 +97,7 @@ const AddForm = ({navigation, route}: Props) => {
             <CustomTextInput
               placeholder="Date"
               onPressIn={() => setOpen(true)}
-              value={getFormattedDate(formik.values.date)}
+              value={formik.values.date}
             />
             <ErrorMessage error={formik.touched.date && formik.errors.date} />
           </View>
