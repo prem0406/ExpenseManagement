@@ -49,7 +49,7 @@ const AddForm = ({navigation, route}: Props) => {
     date: selectedExpense.date ?? '',
     title: selectedExpense.title ?? '',
     desc: selectedExpense.desc ?? '',
-    amount: selectedExpense.desc ?? '',
+    amount: selectedExpense.amount ?? '',
   };
 
   const formik = useFormik<Expence>({
