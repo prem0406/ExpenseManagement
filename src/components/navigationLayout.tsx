@@ -1,4 +1,10 @@
-import {View, StyleSheet, TouchableOpacity, StatusBar} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  StatusBar,
+  KeyboardAvoidingView,
+} from 'react-native';
 import React, {PropsWithChildren} from 'react';
 import {CustomText} from './text';
 import {colors, TextColors} from '../theme/colors';
@@ -15,6 +21,8 @@ export type NavigationLayoutProps = PropsWithChildren<{
     name: IconsType;
     onPress?: () => void;
   };
+  keyboardAvoidingViewBehavior?: 'height' | 'position' | 'padding';
+  enableKeyboardAvoidingView?: boolean;
 }>;
 
 export const NavigationLayout = ({
@@ -22,6 +30,8 @@ export const NavigationLayout = ({
   children,
   leftIcon,
   rightIcon,
+  keyboardAvoidingViewBehavior = 'padding',
+  enableKeyboardAvoidingView,
 }: NavigationLayoutProps) => {
   return (
     <>
@@ -48,7 +58,12 @@ export const NavigationLayout = ({
           )}
         </View>
       </View>
-      {children}
+      <KeyboardAvoidingView
+        style={styles.keyboardAvoidingStyles}
+        behavior={keyboardAvoidingViewBehavior}
+        enabled={!!enableKeyboardAvoidingView}>
+        {children}
+      </KeyboardAvoidingView>
     </>
   );
 };
@@ -73,4 +88,5 @@ const styles = StyleSheet.create({
     height: 48,
     width: 48,
   },
+  keyboardAvoidingStyles: {flex: 1},
 });
