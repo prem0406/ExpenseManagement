@@ -14,7 +14,6 @@ import {addExpense, updateExpense} from '../redux/app.slice';
 import * as Yup from 'yup';
 import {useFormik} from 'formik';
 import {ErrorMessage} from '../components/error';
-import {getFormattedDate} from '../utils';
 
 // Validation schema using Yup
 const validationSchema = Yup.object().shape({
