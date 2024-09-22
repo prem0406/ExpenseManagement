@@ -6,35 +6,31 @@ import {Amount} from './amount';
 import {DateTile} from './dateTile';
 import {Expence} from '../types';
 
-//TODO: remove this component
 type ItemRowProps = {
   item: Expence;
   onPress: (item: Expence) => void;
 };
 
-const ItemRow = ({item, onPress}: ItemRowProps) => {
+export const ListItem = ({item, onPress}: ItemRowProps) => {
   const onPressItem = () => onPress(item);
   return (
     <TouchableOpacity style={styles.container} onPress={onPressItem}>
       <DateTile date={item?.date} />
       <View style={styles.mainContainer}>
+        {/* convert to tag for may be 'category' */}
+        <CustomText
+          type={TextTypes.body_small}
+          color={TextColors.text_secondary}>
+          Label/Tag
+        </CustomText>
         <View style={styles.centerContainer}>
-          {/* convert to tag for may be 'category' */}
-          <CustomText
-            type={TextTypes.body_small}
-            color={TextColors.text_secondary}>
-            Label/Tag
-          </CustomText>
-          <CustomText type={TextTypes.body}>{item.title}</CustomText>
-          {item?.desc && (
-            <CustomText
-              type={TextTypes.body_small}
-              color={TextColors.text_secondary}>
-              {item.desc}
+          <View style={styles.titleWrapper}>
+            <CustomText type={TextTypes.h4}>
+              {item.title?.toLocaleUpperCase()}
             </CustomText>
-          )}
+          </View>
+          <Amount amount={item.amount} />
         </View>
-        <Amount amount={item.amount} />
       </View>
     </TouchableOpacity>
   );
@@ -45,19 +41,19 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingVertical: 16,
     paddingHorizontal: 24,
-    backgroundColor: colors.newTextColors.primary_color_light,
-    // backgroundColor: 'white',
+    backgroundColor: colors.backgroundColors.white,
     borderRadius: 16,
+    borderColor: colors.backgroundColors.mainColor,
+    borderWidth: 2,
   },
   mainContainer: {
     flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    paddingStart: 24,
   },
   centerContainer: {
-    paddingLeft: 24,
-    rowGap: 4,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingTop: 8,
   },
+  titleWrapper: {width: '67%'},
 });
-
-export default ItemRow;

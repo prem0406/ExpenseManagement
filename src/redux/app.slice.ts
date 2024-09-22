@@ -6,11 +6,13 @@ import {Expence} from '../types';
 // Define a type for the slice state
 interface ExpenceSliceState {
   expenses: Expence[];
+  selectedExpense: Partial<Expence>;
 }
 
 // Define the initial state using that type
 const initialState: ExpenceSliceState = {
   expenses: [],
+  selectedExpense: {},
 };
 
 export const expenseSlice = createSlice({
@@ -27,10 +29,14 @@ export const expenseSlice = createSlice({
       );
       state.expenses = updatedExpenses;
     },
+    setSelectedExpense: (state, action: PayloadAction<Expence>) => {
+      state.selectedExpense = action.payload;
+    },
   },
 });
 
-export const {addExpense, removeExpense} = expenseSlice.actions;
+export const {addExpense, removeExpense, setSelectedExpense} =
+  expenseSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectCount = (state: RootState) => state.expenseReducer;

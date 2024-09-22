@@ -2,22 +2,29 @@ import React from 'react';
 import {View, FlatList, StyleSheet} from 'react-native';
 import {RootStackParamList} from '../../App';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import ItemRow from '../components/ItemRow';
 import {NavigationLayout} from '../components/navigationLayout';
-import {useAppSelector} from '../../hooks';
+import {useAppDispatch, useAppSelector} from '../../hooks';
 import {Expence} from '../types';
+import {setSelectedExpense} from '../redux/app.slice';
+import {ListItem} from '../components/listItem';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
 const Home = ({navigation}: Props) => {
   const {expenses} = useAppSelector(state => state.expenseReducer);
+  const dispatch = useAppDispatch();
 
   const handleBtnPress = () => {
     navigation.navigate('AddNew');
   };
 
+  const onItemPress = (item: Expence) => {
+    dispatch(setSelectedExpense(item));
+    navigation.navigate('ExpenseDetails');
+  };
+
   const renderItem = ({item}: {item: Expence}) => (
-    <ItemRow
+    <ListItem
       item={{
         date: item?.date,
         title: item?.title,
@@ -25,7 +32,7 @@ const Home = ({navigation}: Props) => {
         id: item?.id,
         desc: item?.desc,
       }}
-      onPress={() => navigation.navigate('ExpenseDetails')}
+      onPress={onItemPress}
     />
   );
 

@@ -30,6 +30,7 @@ const newTextColors = {
 
 export enum BackgroundColors {
   mainColor = 'mainColor',
+  white = 'white',
 }
 
 type BackgroundOptions<T extends string | number | symbol> = {
@@ -38,6 +39,7 @@ type BackgroundOptions<T extends string | number | symbol> = {
 
 const backgroundColors: BackgroundOptions<keyof typeof BackgroundColors> = {
   mainColor: '#007567',
+  white: '#FFFFFF',
 };
 
 export const colors = {

@@ -11,8 +11,12 @@ import {StyleSheet, View} from 'react-native';
 import {Amount} from '../components/amount';
 import {colors, TextColors} from '../theme/colors';
 import {RootStackParamList} from '../../App';
+import {useAppSelector} from '../../hooks';
 
 export const ExpenseDetails = () => {
+  const selectedExpense = useAppSelector(
+    state => state.expenseReducer.selectedExpense,
+  );
   const navigation =
     useNavigation<NavigationProp<RootStackParamList, 'ExpenseDetails'>>();
   const handleBtnAdd = () => {
@@ -20,7 +24,7 @@ export const ExpenseDetails = () => {
   };
   return (
     <NavigationLayout
-      headerText="Biryani 65"
+      headerText={selectedExpense?.title || ''}
       leftIcon={{name: 'chevronBack', onPress: navigation.goBack}}>
       <View style={styles.container}>
         <View style={styles.banner}>
