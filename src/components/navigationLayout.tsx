@@ -12,7 +12,7 @@ import {Icon} from './icon';
 import {IconsType} from '../assets/icons/iconsMap';
 
 export type NavigationLayoutProps = PropsWithChildren<{
-  headerText: string;
+  headerText?: string;
   leftIcon?: {
     name: IconsType;
     onPress?: () => void;
@@ -26,7 +26,7 @@ export type NavigationLayoutProps = PropsWithChildren<{
 }>;
 
 export const NavigationLayout = ({
-  headerText,
+  headerText = 'Header Text',
   children,
   leftIcon,
   rightIcon,

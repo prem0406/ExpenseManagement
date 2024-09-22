@@ -11,20 +11,29 @@ import {StyleSheet, View} from 'react-native';
 import {Amount} from '../components/amount';
 import {colors, TextColors} from '../theme/colors';
 import {RootStackParamList} from '../../App';
-import {useAppSelector} from '../../hooks';
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import {removeExpense} from '../redux/app.slice';
 
 export const ExpenseDetails = () => {
   const selectedExpense = useAppSelector(
     state => state.expenseReducer.selectedExpense,
   );
+  const dispatch = useAppDispatch();
   const navigation =
     useNavigation<NavigationProp<RootStackParamList, 'ExpenseDetails'>>();
-  const handleBtnAdd = () => {
+
+  const handleEditBtn = () => {
     navigation.navigate('AddNew', {updateMode: true});
   };
+
+  const onPressDelete = () => {
+    dispatch(removeExpense({id: selectedExpense.id}));
+    navigation.navigate('Home');
+  };
+
   return (
     <NavigationLayout
-      headerText={selectedExpense?.title || ''}
+      headerText={selectedExpense?.title}
       leftIcon={{name: 'chevronBack', onPress: navigation.goBack}}>
       <View style={styles.container}>
         <View style={styles.banner}>
@@ -52,8 +61,12 @@ export const ExpenseDetails = () => {
         </View>
 
         <View style={styles.btnContainer}>
-          <CustomButton label="edit" onPress={handleBtnAdd} />
-          <CustomButton label="Delete" variant={ButtonVariant.SECONDARY} />
+          <CustomButton label="edit" onPress={handleEditBtn} />
+          <CustomButton
+            label="Delete"
+            variant={ButtonVariant.SECONDARY}
+            onPress={onPressDelete}
+          />
         </View>
       </View>
     </NavigationLayout>

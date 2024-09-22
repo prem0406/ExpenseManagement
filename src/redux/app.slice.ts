@@ -23,7 +23,7 @@ export const expenseSlice = createSlice({
     addExpense: (state, action: PayloadAction<Expence>) => {
       state.expenses = [...state.expenses, action.payload];
     },
-    removeExpense: (state, action: PayloadAction<{id: string}>) => {
+    removeExpense: (state, action: PayloadAction<{id?: string}>) => {
       const updatedExpenses = state.expenses.filter(
         expense => expense.id !== action.payload.id,
       );
