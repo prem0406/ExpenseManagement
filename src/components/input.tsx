@@ -1,5 +1,6 @@
 import {TextInput, StyleSheet, TextInputProps} from 'react-native';
 import React from 'react';
+import {colors} from '../theme/colors';
 
 export const CustomTextInput = ({...rest}: TextInputProps) => {
   return <TextInput style={styles.nameInput} {...rest} />;
@@ -7,7 +8,7 @@ export const CustomTextInput = ({...rest}: TextInputProps) => {
 
 const styles = StyleSheet.create({
   nameInput: {
-    borderColor: '#0d99ff',
+    borderColor: colors.backgroundColors.mainColor,
     borderWidth: 2,
     borderRadius: 8,
     paddingHorizontal: 24,

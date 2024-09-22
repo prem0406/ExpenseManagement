@@ -2,6 +2,7 @@ export enum TextColors {
   text_primary = 'text_primary',
   text_secondary = 'text_secondary',
   text_On_Dark = 'text_On_Dark',
+  error = 'error',
 }
 
 type ColorOptions<T extends string | number | symbol> = {
@@ -14,6 +15,7 @@ const textColors: ColorOptions<keyof typeof TextColors> = {
   text_primary: '#212121',
   text_secondary: '#757575',
   text_On_Dark: '#FFFFFF',
+  error: '#FF0000',
 };
 
 const newTextColors = {

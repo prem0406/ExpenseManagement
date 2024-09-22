@@ -1,7 +1,7 @@
 import {Text, TouchableOpacity, StyleSheet} from 'react-native';
 import React from 'react';
 import {colors, TextColors} from '../theme/colors';
-import {CustomText} from './text';
+import {CustomText, TextTypes} from './text';
 
 export enum ButtonVariant {
   PRIMARY = 'PRIMARY',
@@ -23,12 +23,13 @@ export const CustomButton = ({
   return (
     <TouchableOpacity style={styles.wrapper} onPress={onPress}>
       <CustomText
+        type={TextTypes.h4}
         color={
           variant === ButtonVariant.PRIMARY
             ? TextColors.text_On_Dark
             : TextColors.text_primary
         }>
-        {label}
+        {label?.toLocaleUpperCase()}
       </CustomText>
     </TouchableOpacity>
   );
