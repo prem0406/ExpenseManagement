@@ -29,13 +29,19 @@ export const expenseSlice = createSlice({
       );
       state.expenses = updatedExpenses;
     },
+    updateExpense: (state, action: PayloadAction<Expence>) => {
+      const updatedExpenses = state.expenses.map(expense =>
+        expense.id === action.payload.id ? action.payload : expense,
+      );
+      state.expenses = updatedExpenses;
+    },
     setSelectedExpense: (state, action: PayloadAction<Expence>) => {
       state.selectedExpense = action.payload;
     },
   },
 });
 
-export const {addExpense, removeExpense, setSelectedExpense} =
+export const {addExpense, removeExpense, setSelectedExpense, updateExpense} =
   expenseSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type

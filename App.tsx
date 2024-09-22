@@ -14,7 +14,7 @@ import {persistor, store} from './store';
 export type RootStackParamList = {
   // Login: undefined;
   Home: undefined;
-  AddNew: undefined;
+  AddNew: {updateMode?: boolean};
   ExpenseDetails: undefined;
 };
 

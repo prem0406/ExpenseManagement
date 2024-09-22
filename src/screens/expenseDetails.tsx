@@ -20,7 +20,7 @@ export const ExpenseDetails = () => {
   const navigation =
     useNavigation<NavigationProp<RootStackParamList, 'ExpenseDetails'>>();
   const handleBtnAdd = () => {
-    navigation.navigate('AddNew');
+    navigation.navigate('AddNew', {updateMode: true});
   };
   return (
     <NavigationLayout
@@ -31,10 +31,14 @@ export const ExpenseDetails = () => {
           <View style={styles.tag}>
             <CustomText color={TextColors.text_On_Dark}>Meal</CustomText>
           </View>
-          <Amount amount="5000" color={TextColors.text_On_Dark} size="large" />
+          <Amount
+            amount={selectedExpense?.amount}
+            color={TextColors.text_On_Dark}
+            size="large"
+          />
         </View>
         <View style={styles.tile}>
-          <CustomText type={TextTypes.h1}>14 Sep 2024</CustomText>
+          <CustomText type={TextTypes.h1}>{selectedExpense.date}</CustomText>
         </View>
         <View style={styles.details}>
           <View style={styles.detailItem}>
@@ -43,12 +47,12 @@ export const ExpenseDetails = () => {
               color={TextColors.text_secondary}>
               Description
             </CustomText>
-            <CustomText>Spent this amount on dinner at Biryani65</CustomText>
+            <CustomText>{selectedExpense.desc}</CustomText>
           </View>
         </View>
 
         <View style={styles.btnContainer}>
-          <CustomButton label="Add new" onPress={handleBtnAdd} />
+          <CustomButton label="edit" onPress={handleBtnAdd} />
           <CustomButton label="Delete" variant={ButtonVariant.SECONDARY} />
         </View>
       </View>

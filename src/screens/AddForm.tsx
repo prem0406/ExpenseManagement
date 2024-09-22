@@ -9,8 +9,8 @@ import {CustomButton} from '../components';
 import {CustomTextInput} from '../components/input';
 import {NavigationLayout} from '../components/navigationLayout';
 import {Expence} from '../types';
-import {useAppDispatch} from '../../hooks';
-import {addExpense} from '../redux/app.slice';
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import {addExpense, updateExpense} from '../redux/app.slice';
 import * as Yup from 'yup';
 import {useFormik} from 'formik';
 import {ErrorMessage} from '../components/error';
@@ -26,27 +26,46 @@ const validationSchema = Yup.object().shape({
     .required('Amount is required'),
 });
 
+const initialValues: Expence = {
+  id: uuid.v4().toString(),
+  date: new Date().toDateString(),
+  title: '',
+  desc: '',
+  amount: '',
+};
+
 type Props = NativeStackScreenProps<RootStackParamList, 'AddNew'>;
 
-const AddForm = ({navigation}: Props) => {
+const AddForm = ({navigation, route}: Props) => {
   const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
+  const selectedExpense = useAppSelector(
+    state => state.expenseReducer.selectedExpense,
+  );
   const dipatch = useAppDispatch();
-  const formik = useFormik({
-    initialValues: {
-      date: new Date().toDateString(),
-      title: '',
-      desc: '',
-      amount: '',
-    },
+  const {updateMode} = route.params;
+
+  const filledValues: Expence = {
+    id: selectedExpense.id ?? '',
+    date: selectedExpense.date ?? '',
+    title: selectedExpense.title ?? '',
+    desc: selectedExpense.desc ?? '',
+    amount: selectedExpense.desc ?? '',
+  };
+
+  const formik = useFormik<Expence>({
+    initialValues: updateMode ? filledValues : initialValues,
     validationSchema: validationSchema,
     onSubmit: (values, {resetForm}) => {
       // Handle form submission
       const expense: Expence = {
-        id: uuid.v4().toString(),
         ...values,
       };
-      dipatch(addExpense(expense));
+      if (updateMode) {
+        dipatch(updateExpense(expense));
+      } else {
+        dipatch(addExpense(expense));
+      }
       navigation.navigate('Home');
       resetForm();
     },

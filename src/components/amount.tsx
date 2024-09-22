@@ -5,12 +5,12 @@ import {TextColors} from '../theme/colors';
 type AmountSizes = 'small' | 'medium' | 'large';
 
 export const Amount = ({
-  amount,
+  amount = '0',
   currency = 'Rs.',
   size = 'small',
   color = TextColors.text_primary,
 }: {
-  amount: string;
+  amount?: string;
   currency?: string;
   size?: AmountSizes;
   color?: TextColors;
