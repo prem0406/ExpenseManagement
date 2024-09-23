@@ -116,6 +116,8 @@ const AddForm = ({navigation, route}: Props) => {
             onChangeText={formik.handleChange('desc')}
             onBlur={formik.handleBlur('desc')}
             value={formik.values.desc}
+            multiline
+            textAlignVertical="top"
           />
           <View>
             <CustomTextInput
