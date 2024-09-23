@@ -1,6 +1,5 @@
 import React from 'react';
 import {View, FlatList, StyleSheet} from 'react-native';
-import {RootStackParamList} from '../../App';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {NavigationLayout} from '../components/navigationLayout';
 import {useAppDispatch, useAppSelector} from '../../hooks';
@@ -8,6 +7,7 @@ import {Expence} from '../types';
 import {setSelectedExpense} from '../redux/app.slice';
 import {ListItem} from '../components/listItem';
 import {useDarkMode} from '../hooks/useDarkMode';
+import {RootStackParamList} from '../navigation/appNavigation';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 

@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {View, StyleSheet} from 'react-native';
 import DatePicker from 'react-native-date-picker';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {RootStackParamList} from '../../App';
 
 import uuid from 'react-native-uuid';
 import {CustomButton} from '../components';
@@ -15,6 +14,7 @@ import * as Yup from 'yup';
 import {useFormik} from 'formik';
 import {ErrorMessage} from '../components/error';
 import {useDarkMode} from '../hooks/useDarkMode';
+import {RootStackParamList} from '../navigation/appNavigation';
 
 // Validation schema using Yup
 const validationSchema = Yup.object().shape({

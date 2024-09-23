@@ -3,11 +3,11 @@ import {NavigationLayout} from '../components/navigationLayout';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {ButtonVariant, CustomButton} from '../components';
 import {StyleSheet, View} from 'react-native';
-import {RootStackParamList} from '../../App';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {removeExpense} from '../redux/app.slice';
 import {DetailComponent} from '../components/detail';
 import {useDarkMode} from '../hooks/useDarkMode';
+import {RootStackParamList} from '../navigation/appNavigation';
 
 export const ExpenseDetails = () => {
   const {isDarkMode} = useDarkMode();
