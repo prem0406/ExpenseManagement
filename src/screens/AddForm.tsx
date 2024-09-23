@@ -14,6 +14,7 @@ import {addExpense, updateExpense} from '../redux/app.slice';
 import * as Yup from 'yup';
 import {useFormik} from 'formik';
 import {ErrorMessage} from '../components/error';
+import {useDarkMode} from '../hooks/useDarkMode';
 
 // Validation schema using Yup
 const validationSchema = Yup.object().shape({
@@ -36,6 +37,10 @@ const initialValues: Expence = {
 type Props = NativeStackScreenProps<RootStackParamList, 'AddNew'>;
 
 const AddForm = ({navigation, route}: Props) => {
+  const {isDarkMode} = useDarkMode();
+
+  const styles = getStyles({isDarkMode});
+
   const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
   const selectedExpense = useAppSelector(
@@ -142,18 +147,20 @@ const AddForm = ({navigation, route}: Props) => {
 
 export default AddForm;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'space-between',
-    paddingBottom: 24,
-  },
-  topWrapper: {
-    padding: 16,
-    rowGap: 16,
-  },
-  btnContainer: {
-    paddingHorizontal: 16,
-    width: '100%',
-  },
-});
+const getStyles = ({isDarkMode}: {isDarkMode: boolean}) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'space-between',
+      paddingBottom: 24,
+      backgroundColor: isDarkMode ? '#333333' : '#efefef',
+    },
+    topWrapper: {
+      padding: 16,
+      rowGap: 16,
+    },
+    btnContainer: {
+      paddingHorizontal: 16,
+      width: '100%',
+    },
+  });

@@ -7,8 +7,12 @@ import {RootStackParamList} from '../../App';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {removeExpense} from '../redux/app.slice';
 import {DetailComponent} from '../components/detail';
+import {useDarkMode} from '../hooks/useDarkMode';
 
 export const ExpenseDetails = () => {
+  const {isDarkMode} = useDarkMode();
+
+  const styles = getStyles({isDarkMode});
   const selectedExpense = useAppSelector(
     state => state.expenseReducer.selectedExpense,
   );
@@ -57,20 +61,22 @@ export const ExpenseDetails = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'space-between',
-    paddingTop: 16,
-    paddingBottom: 24,
-  },
+const getStyles = ({isDarkMode}: {isDarkMode: boolean}) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'space-between',
+      paddingTop: 16,
+      paddingBottom: 24,
+      backgroundColor: isDarkMode ? '#333333' : '#efefef',
+    },
 
-  details: {
-    paddingHorizontal: 16,
-    rowGap: 12,
-  },
-  btnContainer: {
-    paddingHorizontal: 16,
-    rowGap: 12,
-  },
-});
+    details: {
+      paddingHorizontal: 16,
+      rowGap: 12,
+    },
+    btnContainer: {
+      paddingHorizontal: 16,
+      rowGap: 12,
+    },
+  });

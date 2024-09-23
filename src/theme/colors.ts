@@ -15,7 +15,7 @@ const textColors: ColorOptions<keyof typeof TextColors> = {
   text_primary: '#212121',
   text_secondary: '#757575',
   text_On_Dark: '#FFFFFF',
-  error: '#FF0000',
+  error: '#ff6b6b',
 };
 
 const newTextColors = {

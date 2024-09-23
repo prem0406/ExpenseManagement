@@ -7,12 +7,17 @@ import {useAppDispatch, useAppSelector} from '../../hooks';
 import {Expence} from '../types';
 import {setSelectedExpense} from '../redux/app.slice';
 import {ListItem} from '../components/listItem';
+import {useDarkMode} from '../hooks/useDarkMode';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
 const Home = ({navigation}: Props) => {
   const {expenses} = useAppSelector(state => state.expenseReducer);
   const dispatch = useAppDispatch();
+
+  const {isDarkMode} = useDarkMode();
+
+  const styles = getStyles({isDarkMode});
 
   const handleBtnPress = () => {
     navigation.navigate('AddNew');
@@ -57,14 +62,17 @@ const Home = ({navigation}: Props) => {
 
 export default Home;
 
-const styles = StyleSheet.create({
-  container: {
-    padding: 16,
-  },
-  topWrapper: {
-    gap: 8,
-  },
-  contentContainerStyle: {
-    gap: 8,
-  },
-});
+const getStyles = ({isDarkMode}: {isDarkMode: boolean}) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      padding: 16,
+      backgroundColor: isDarkMode ? '#333333' : '#efefef',
+    },
+    topWrapper: {
+      gap: 8,
+    },
+    contentContainerStyle: {
+      gap: 8,
+    },
+  });
